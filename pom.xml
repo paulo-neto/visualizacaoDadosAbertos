@@ -28,6 +28,7 @@
     <hsqldb.version>2.2.9</hsqldb.version>
     <jasper.version>5.1.0</jasper.version>
     <jFreeChart.version>1.0.19</jFreeChart.version>
+    <xStream.version>1.4.8</xStream.version>
   </properties>
 
   <build>
@@ -298,6 +299,12 @@
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-jaxrs</artifactId>
       <version>1.8.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>${xStream.version}</version>
     </dependency>
 
 
