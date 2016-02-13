@@ -7,5 +7,5 @@ import si.dce.ufpb.br.visualizacaodadosabertos.util.excecoes.VisualizacaoDadosAb
  */
 public interface IParseService<T> {
 
-    public T lerXml(String caminhoArquivo) throws VisualizacaoDadosAbertosException;
+    public T lerXml(String nomeArquivo) throws VisualizacaoDadosAbertosException;
 }
