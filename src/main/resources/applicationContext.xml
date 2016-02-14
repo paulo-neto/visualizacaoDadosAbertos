@@ -16,8 +16,8 @@
     <!-- SpringMVC -->
     <import resource="spring-mvc.xml"/>
 
-    <!-- SpringData -->
-    <!--<import resource="spring-jpa.xml"/>-->
+     <!--SpringData-->
+    <import resource="spring-jpa.xml"/>
 
     <!-- SpringSecurity -->
     <!--<import resource="spring-security.xml"/>-->

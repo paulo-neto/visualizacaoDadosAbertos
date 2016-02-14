@@ -1,24 +1,12 @@
-package si.dce.ufpb.br.visualizacaodadosabertos.modelo;
+package si.dce.ufpb.br.visualizacaodadosabertos.parser;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.math.BigDecimal;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * Created by paulo on 14/02/16.
+ * Created by paulo on 09/02/16.
  */
-@Entity
-@Table(name = "TB_DESPESA")
-public class Despesa implements Serializable{
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id_despesa")
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_orgao", nullable = false, updatable = false)
-    private Orgao orgao;
+@XStreamAlias("despesa")
+public class DespesaParser {
 
     private String txNomeParlamentar;
 
@@ -52,11 +40,11 @@ public class Despesa implements Serializable{
 
     private String datEmissao;
 
-    private BigDecimal vlrDocumento;
+    private String vlrDocumento;
 
-    private BigDecimal vlrGlosa;
+    private String vlrGlosa;
 
-    private BigDecimal vlrLiquido;
+    private String vlrLiquido;
 
     private Long numMes;
 
@@ -72,25 +60,9 @@ public class Despesa implements Serializable{
 
     private Long numRessarcimento;
 
-    private BigDecimal vlrRestituicao;
+    private String vlrRestituicao;
 
     private Long nuDeputadoId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Orgao getOrgao() {
-        return orgao;
-    }
-
-    public void setOrgao(Orgao orgao) {
-        this.orgao = orgao;
-    }
 
     public String getTxNomeParlamentar() {
         return txNomeParlamentar;
@@ -220,27 +192,27 @@ public class Despesa implements Serializable{
         this.datEmissao = datEmissao;
     }
 
-    public BigDecimal getVlrDocumento() {
+    public String getVlrDocumento() {
         return vlrDocumento;
     }
 
-    public void setVlrDocumento(BigDecimal vlrDocumento) {
+    public void setVlrDocumento(String vlrDocumento) {
         this.vlrDocumento = vlrDocumento;
     }
 
-    public BigDecimal getVlrGlosa() {
+    public String getVlrGlosa() {
         return vlrGlosa;
     }
 
-    public void setVlrGlosa(BigDecimal vlrGlosa) {
+    public void setVlrGlosa(String vlrGlosa) {
         this.vlrGlosa = vlrGlosa;
     }
 
-    public BigDecimal getVlrLiquido() {
+    public String getVlrLiquido() {
         return vlrLiquido;
     }
 
-    public void setVlrLiquido(BigDecimal vlrLiquido) {
+    public void setVlrLiquido(String vlrLiquido) {
         this.vlrLiquido = vlrLiquido;
     }
 
@@ -300,11 +272,11 @@ public class Despesa implements Serializable{
         this.numRessarcimento = numRessarcimento;
     }
 
-    public BigDecimal getVlrRestituicao() {
+    public String getVlrRestituicao() {
         return vlrRestituicao;
     }
 
-    public void setVlrRestituicao(BigDecimal vlrRestituicao) {
+    public void setVlrRestituicao(String vlrRestituicao) {
         this.vlrRestituicao = vlrRestituicao;
     }
 
@@ -321,59 +293,55 @@ public class Despesa implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Despesa despesa = (Despesa) o;
+        DespesaParser despesaParser = (DespesaParser) o;
 
-        if (id != null ? !id.equals(despesa.id) : despesa.id != null) return false;
-        if (orgao != null ? !orgao.equals(despesa.orgao) : despesa.orgao != null) return false;
-        if (txNomeParlamentar != null ? !txNomeParlamentar.equals(despesa.txNomeParlamentar) : despesa.txNomeParlamentar != null)
+        if (txNomeParlamentar != null ? !txNomeParlamentar.equals(despesaParser.txNomeParlamentar) : despesaParser.txNomeParlamentar != null)
             return false;
-        if (ideCadastro != null ? !ideCadastro.equals(despesa.ideCadastro) : despesa.ideCadastro != null) return false;
-        if (nuCarteiraParlamentar != null ? !nuCarteiraParlamentar.equals(despesa.nuCarteiraParlamentar) : despesa.nuCarteiraParlamentar != null)
+        if (ideCadastro != null ? !ideCadastro.equals(despesaParser.ideCadastro) : despesaParser.ideCadastro != null) return false;
+        if (nuCarteiraParlamentar != null ? !nuCarteiraParlamentar.equals(despesaParser.nuCarteiraParlamentar) : despesaParser.nuCarteiraParlamentar != null)
             return false;
-        if (nuLegislatura != null ? !nuLegislatura.equals(despesa.nuLegislatura) : despesa.nuLegislatura != null)
+        if (nuLegislatura != null ? !nuLegislatura.equals(despesaParser.nuLegislatura) : despesaParser.nuLegislatura != null)
             return false;
-        if (sgUF != null ? !sgUF.equals(despesa.sgUF) : despesa.sgUF != null) return false;
-        if (sgPartido != null ? !sgPartido.equals(despesa.sgPartido) : despesa.sgPartido != null) return false;
-        if (codLegislatura != null ? !codLegislatura.equals(despesa.codLegislatura) : despesa.codLegislatura != null)
+        if (sgUF != null ? !sgUF.equals(despesaParser.sgUF) : despesaParser.sgUF != null) return false;
+        if (sgPartido != null ? !sgPartido.equals(despesaParser.sgPartido) : despesaParser.sgPartido != null) return false;
+        if (codLegislatura != null ? !codLegislatura.equals(despesaParser.codLegislatura) : despesaParser.codLegislatura != null)
             return false;
-        if (numSubCota != null ? !numSubCota.equals(despesa.numSubCota) : despesa.numSubCota != null) return false;
-        if (txtDescricao != null ? !txtDescricao.equals(despesa.txtDescricao) : despesa.txtDescricao != null)
+        if (numSubCota != null ? !numSubCota.equals(despesaParser.numSubCota) : despesaParser.numSubCota != null) return false;
+        if (txtDescricao != null ? !txtDescricao.equals(despesaParser.txtDescricao) : despesaParser.txtDescricao != null)
             return false;
-        if (numEspecificacaoSubCota != null ? !numEspecificacaoSubCota.equals(despesa.numEspecificacaoSubCota) : despesa.numEspecificacaoSubCota != null)
+        if (numEspecificacaoSubCota != null ? !numEspecificacaoSubCota.equals(despesaParser.numEspecificacaoSubCota) : despesaParser.numEspecificacaoSubCota != null)
             return false;
-        if (txtDescricaoEspecificacao != null ? !txtDescricaoEspecificacao.equals(despesa.txtDescricaoEspecificacao) : despesa.txtDescricaoEspecificacao != null)
+        if (txtDescricaoEspecificacao != null ? !txtDescricaoEspecificacao.equals(despesaParser.txtDescricaoEspecificacao) : despesaParser.txtDescricaoEspecificacao != null)
             return false;
-        if (txtFornecedor != null ? !txtFornecedor.equals(despesa.txtFornecedor) : despesa.txtFornecedor != null)
+        if (txtFornecedor != null ? !txtFornecedor.equals(despesaParser.txtFornecedor) : despesaParser.txtFornecedor != null)
             return false;
-        if (txtCNPJCPF != null ? !txtCNPJCPF.equals(despesa.txtCNPJCPF) : despesa.txtCNPJCPF != null) return false;
-        if (txtNumero != null ? !txtNumero.equals(despesa.txtNumero) : despesa.txtNumero != null) return false;
-        if (indTipoDocumento != null ? !indTipoDocumento.equals(despesa.indTipoDocumento) : despesa.indTipoDocumento != null)
+        if (txtCNPJCPF != null ? !txtCNPJCPF.equals(despesaParser.txtCNPJCPF) : despesaParser.txtCNPJCPF != null) return false;
+        if (txtNumero != null ? !txtNumero.equals(despesaParser.txtNumero) : despesaParser.txtNumero != null) return false;
+        if (indTipoDocumento != null ? !indTipoDocumento.equals(despesaParser.indTipoDocumento) : despesaParser.indTipoDocumento != null)
             return false;
-        if (datEmissao != null ? !datEmissao.equals(despesa.datEmissao) : despesa.datEmissao != null) return false;
-        if (vlrDocumento != null ? !vlrDocumento.equals(despesa.vlrDocumento) : despesa.vlrDocumento != null)
+        if (datEmissao != null ? !datEmissao.equals(despesaParser.datEmissao) : despesaParser.datEmissao != null) return false;
+        if (vlrDocumento != null ? !vlrDocumento.equals(despesaParser.vlrDocumento) : despesaParser.vlrDocumento != null)
             return false;
-        if (vlrGlosa != null ? !vlrGlosa.equals(despesa.vlrGlosa) : despesa.vlrGlosa != null) return false;
-        if (vlrLiquido != null ? !vlrLiquido.equals(despesa.vlrLiquido) : despesa.vlrLiquido != null) return false;
-        if (numMes != null ? !numMes.equals(despesa.numMes) : despesa.numMes != null) return false;
-        if (numAno != null ? !numAno.equals(despesa.numAno) : despesa.numAno != null) return false;
-        if (numParcela != null ? !numParcela.equals(despesa.numParcela) : despesa.numParcela != null) return false;
-        if (txtPassageiro != null ? !txtPassageiro.equals(despesa.txtPassageiro) : despesa.txtPassageiro != null)
+        if (vlrGlosa != null ? !vlrGlosa.equals(despesaParser.vlrGlosa) : despesaParser.vlrGlosa != null) return false;
+        if (vlrLiquido != null ? !vlrLiquido.equals(despesaParser.vlrLiquido) : despesaParser.vlrLiquido != null) return false;
+        if (numMes != null ? !numMes.equals(despesaParser.numMes) : despesaParser.numMes != null) return false;
+        if (numAno != null ? !numAno.equals(despesaParser.numAno) : despesaParser.numAno != null) return false;
+        if (numParcela != null ? !numParcela.equals(despesaParser.numParcela) : despesaParser.numParcela != null) return false;
+        if (txtPassageiro != null ? !txtPassageiro.equals(despesaParser.txtPassageiro) : despesaParser.txtPassageiro != null)
             return false;
-        if (txtTrecho != null ? !txtTrecho.equals(despesa.txtTrecho) : despesa.txtTrecho != null) return false;
-        if (numLote != null ? !numLote.equals(despesa.numLote) : despesa.numLote != null) return false;
-        if (numRessarcimento != null ? !numRessarcimento.equals(despesa.numRessarcimento) : despesa.numRessarcimento != null)
+        if (txtTrecho != null ? !txtTrecho.equals(despesaParser.txtTrecho) : despesaParser.txtTrecho != null) return false;
+        if (numLote != null ? !numLote.equals(despesaParser.numLote) : despesaParser.numLote != null) return false;
+        if (numRessarcimento != null ? !numRessarcimento.equals(despesaParser.numRessarcimento) : despesaParser.numRessarcimento != null)
             return false;
-        if (vlrRestituicao != null ? !vlrRestituicao.equals(despesa.vlrRestituicao) : despesa.vlrRestituicao != null)
+        if (vlrRestituicao != null ? !vlrRestituicao.equals(despesaParser.vlrRestituicao) : despesaParser.vlrRestituicao != null)
             return false;
-        return !(nuDeputadoId != null ? !nuDeputadoId.equals(despesa.nuDeputadoId) : despesa.nuDeputadoId != null);
+        return !(nuDeputadoId != null ? !nuDeputadoId.equals(despesaParser.nuDeputadoId) : despesaParser.nuDeputadoId != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (orgao != null ? orgao.hashCode() : 0);
-        result = 31 * result + (txNomeParlamentar != null ? txNomeParlamentar.hashCode() : 0);
+        int result = txNomeParlamentar != null ? txNomeParlamentar.hashCode() : 0;
         result = 31 * result + (ideCadastro != null ? ideCadastro.hashCode() : 0);
         result = 31 * result + (nuCarteiraParlamentar != null ? nuCarteiraParlamentar.hashCode() : 0);
         result = 31 * result + (nuLegislatura != null ? nuLegislatura.hashCode() : 0);

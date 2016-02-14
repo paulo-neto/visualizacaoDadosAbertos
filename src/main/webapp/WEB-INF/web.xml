@@ -9,14 +9,7 @@
         <!-- <param-value>Production</param-value> -->
         <param-value>Development</param-value>
     </context-param>
-<!--
-    <context-param>
-        <javaee:param-name>contextConfigLocation</javaee:param-name>
-        <javaee:param-value>
-            classpath:applicationContext.xml
-        </javaee:param-value>
-    </context-param>
--->
+
     <!-- Spring servlet that will handle the requests-->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
@@ -68,7 +61,6 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
-
 
     <!-- Tempo de inatividade no sistema, em minutos -->
     <session-config>
