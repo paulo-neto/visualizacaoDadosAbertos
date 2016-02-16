@@ -29,8 +29,9 @@ public class IndexController extends ControllerUtil{
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> olaMundo()throws VisualizacaoDadosAbertosException{
-        String caminho = obterCaminhoDadosXml("AnoAtual.xml");
+        String caminho = obterCaminhoDadosXml("dados.xml");
         OrgaoParser orgaoParser = parseService.lerXml(caminho);
+        //TODO CONTINUAR AQUI
         return new ResponseEntity<String>("Ol\u00E1 mundo", HttpStatus.OK);
     }
 

@@ -5,7 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 /**
  * Created by paulo on 09/02/16.
  */
-@XStreamAlias("despesa")
+@XStreamAlias("DESPESA")
 public class DespesaParser {
 
     private String txNomeParlamentar;

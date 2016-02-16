@@ -16,19 +16,10 @@ import java.io.FileReader;
 @Service
 public class ParseService implements IParseService<OrgaoParser>  {
 
-    private String pastaDadosXml = "/dadosXml/";
-
-
     @Override
     public OrgaoParser lerXml(String nomeArquivo) throws VisualizacaoDadosAbertosException {
         FileReader reader = null;
         OrgaoParser orgaoParser = null;
-
-        //TODO CONTINUAR AQUI
-        /*ServletContext scontext = (ServletContext) ServletRequestUtils.get*/
-                //.getExternalContext().getContext();
-
-
         try {
             //carrega o arquivo XML para um objeto reader
             reader = new FileReader(nomeArquivo);
@@ -36,7 +27,7 @@ public class ParseService implements IParseService<OrgaoParser>  {
             xStream.processAnnotations(OrgaoParser.class);
 
             orgaoParser = (OrgaoParser) xStream.fromXML(reader);
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }finally {
             return orgaoParser;

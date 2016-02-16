@@ -12,29 +12,56 @@ import java.util.List;
 public class OrgaoParser implements Serializable {
 
 
-    private List<DespesaParser> despesaParsers;
-
-    public List<DespesaParser> getDespesaParsers() {
-        return despesaParsers;
-    }
-
-    public void setDespesaParsers(List<DespesaParser> despesaParsers) {
-        this.despesaParsers = despesaParsers;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OrgaoParser orgaoParser = (OrgaoParser) o;
-
-        return !(despesaParsers != null ? !despesaParsers.equals(orgaoParser.despesaParsers) : orgaoParser.despesaParsers != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return despesaParsers != null ? despesaParsers.hashCode() : 0;
-    }
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4371977346547897137L;
+	private List<DespesaParser> DESPESAS;
+	/**
+	 * @return the despesas
+	 */
+	public List<DespesaParser> getDESPESAS() {
+		return DESPESAS;
+	}
+	/**
+	 * @param despesas the despesas to set
+	 */
+	public void setDESPESAS(List<DespesaParser> despesas) {
+		this.DESPESAS = despesas;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((DESPESAS == null) ? 0 : DESPESAS.hashCode());
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		OrgaoParser other = (OrgaoParser) obj;
+		if (DESPESAS == null) {
+			if (other.DESPESAS != null) {
+				return false;
+			}
+		} else if (!DESPESAS.equals(other.DESPESAS)) {
+			return false;
+		}
+		return true;
+	}
 }
