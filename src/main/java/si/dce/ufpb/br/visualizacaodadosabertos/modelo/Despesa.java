@@ -372,7 +372,6 @@ public class Despesa implements Serializable{
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (orgao != null ? orgao.hashCode() : 0);
         result = 31 * result + (txNomeParlamentar != null ? txNomeParlamentar.hashCode() : 0);
         result = 31 * result + (ideCadastro != null ? ideCadastro.hashCode() : 0);
         result = 31 * result + (nuCarteiraParlamentar != null ? nuCarteiraParlamentar.hashCode() : 0);

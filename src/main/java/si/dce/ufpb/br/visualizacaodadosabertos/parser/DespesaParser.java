@@ -1,5 +1,9 @@
 package si.dce.ufpb.br.visualizacaodadosabertos.parser;
 
+import java.math.BigDecimal;
+
+import si.dce.ufpb.br.visualizacaodadosabertos.modelo.Despesa;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -288,6 +292,38 @@ public class DespesaParser {
         this.nuDeputadoId = nuDeputadoId;
     }
 
+    public Despesa getDespesa(){
+    	Despesa despesa = new Despesa();
+    	despesa.setCodLegislatura(this.getCodLegislatura());
+    	despesa.setDatEmissao(this.getDatEmissao());
+    	despesa.setIdeCadastro(this.getIdeCadastro());
+    	despesa.setIndTipoDocumento(this.getIndTipoDocumento());
+    	despesa.setNuCarteiraParlamentar(this.getNuCarteiraParlamentar());
+    	despesa.setNuDeputadoId(this.getNuDeputadoId());
+    	despesa.setNuLegislatura(this.getNuLegislatura());
+    	despesa.setNumAno(this.getNumAno());
+    	despesa.setNumEspecificacaoSubCota(this.getNumEspecificacaoSubCota());
+    	despesa.setNumLote(this.getNumLote());
+    	despesa.setNumMes(this.getNumMes());
+    	despesa.setNumParcela(this.getNumParcela());
+    	despesa.setNumRessarcimento(this.getNumRessarcimento());
+    	despesa.setNumSubCota(this.getNumSubCota());
+    	despesa.setSgPartido(this.getSgPartido());
+    	despesa.setSgUF(this.getSgUF());
+    	despesa.setTxNomeParlamentar(this.getTxNomeParlamentar());
+    	despesa.setTxtCNPJCPF(this.getTxtCNPJCPF());
+    	despesa.setTxtDescricao(this.getTxtDescricao());
+    	despesa.setTxtDescricaoEspecificacao(this.getTxtDescricaoEspecificacao());
+    	despesa.setTxtFornecedor(this.getTxtFornecedor());
+    	despesa.setTxtNumero(this.getTxtNumero());
+    	despesa.setTxtPassageiro(this.getTxtPassageiro());
+    	despesa.setTxtTrecho(this.getTxtTrecho());
+    	despesa.setVlrDocumento(new BigDecimal(this.getVlrDocumento()));
+    	despesa.setVlrGlosa(new BigDecimal(this.getVlrGlosa()));
+    	despesa.setVlrLiquido(new BigDecimal(this.getVlrLiquido()));
+    	despesa.setVlrRestituicao(new BigDecimal(this.getVlrRestituicao() == null ? "0" : this.getVlrRestituicao()));
+    	return despesa;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

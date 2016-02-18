@@ -5,6 +5,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.io.Serializable;
 import java.util.List;
 
+import si.dce.ufpb.br.visualizacaodadosabertos.modelo.Despesa;
+import si.dce.ufpb.br.visualizacaodadosabertos.modelo.Orgao;
+
 /**
  * Created by paulo on 09/02/16.
  */
@@ -22,6 +25,18 @@ public class OrgaoParser implements Serializable {
 	 */
 	public List<DespesaParser> getDESPESAS() {
 		return DESPESAS;
+	}
+	
+	public Orgao getOrgao(){
+		Orgao orgao = new Orgao();
+		orgao.setNomeOrgao("Câmara dos Deputados");
+		Despesa despesa = null;
+		for(DespesaParser dp : this.DESPESAS){
+			despesa = dp.getDespesa();
+			despesa.setOrgao(orgao);
+			orgao.getDespesas().add(despesa);
+		}
+		return orgao;
 	}
 	/**
 	 * @param despesas the despesas to set
