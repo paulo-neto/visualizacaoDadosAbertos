@@ -1,6 +1,12 @@
 package si.dce.ufpb.br.visualizacaodadosabertos.modelo;
 
 import javax.persistence.*;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import si.dce.ufpb.br.visualizacaodadosabertos.util.serializer.MonetarioSerializer;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -11,11 +17,18 @@ import java.math.BigDecimal;
 @Table(name = "TB_DESPESA")
 public class Despesa implements Serializable{
 
-    @Id
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2548155677906685079L;
+
+	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id_despesa")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_orgao", nullable = false, updatable = false)
     private Orgao orgao;
@@ -52,10 +65,13 @@ public class Despesa implements Serializable{
 
     private String datEmissao;
 
+    @JsonSerialize(using = MonetarioSerializer.class)
     private BigDecimal vlrDocumento;
-
+    
+    @JsonSerialize(using = MonetarioSerializer.class)
     private BigDecimal vlrGlosa;
 
+    @JsonSerialize(using = MonetarioSerializer.class)
     private BigDecimal vlrLiquido;
 
     private Long numMes;
@@ -72,6 +88,7 @@ public class Despesa implements Serializable{
 
     private Long numRessarcimento;
 
+    @JsonSerialize(using = MonetarioSerializer.class)
     private BigDecimal vlrRestituicao;
 
     private Long nuDeputadoId;

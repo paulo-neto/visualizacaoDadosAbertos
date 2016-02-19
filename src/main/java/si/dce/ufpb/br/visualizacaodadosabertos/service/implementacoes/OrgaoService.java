@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import si.dce.ufpb.br.visualizacaodadosabertos.modelo.Orgao;
+import si.dce.ufpb.br.visualizacaodadosabertos.repository.implementacoes.OrgaoRepositoryCustom;
 import si.dce.ufpb.br.visualizacaodadosabertos.repository.intefaces.OrgaoRepository;
 import si.dce.ufpb.br.visualizacaodadosabertos.service.interfaces.IOrgaoService;
 import si.dce.ufpb.br.visualizacaodadosabertos.util.excecoes.VisualizacaoDadosAbertosException;
@@ -17,6 +18,8 @@ public class OrgaoService {
 
 	@Autowired
 	private OrgaoRepository orgaoRepository;
+	@Autowired
+	private OrgaoRepositoryCustom repositoryCustom;
 	
 	
 	public Orgao salvar(Orgao entidade) throws VisualizacaoDadosAbertosException {
@@ -24,8 +27,7 @@ public class OrgaoService {
 	}
 
 	public List<Orgao> obterTodosAtivos() {
-		// TODO Auto-generated method stub
-		return null;
+		return repositoryCustom.obterTodosAtivos();
 	}
 
 }

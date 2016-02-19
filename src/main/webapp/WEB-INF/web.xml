@@ -55,12 +55,12 @@
         <servlet-name>dispatcher</servlet-name>
     </filter-mapping>
 
-    <listener>
-        <javaee:listener-class>org.springframework.web.context.ContextLoaderListener</javaee:listener-class>
-    </listener>
-    <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-    </listener>
+<!--     <listener> -->
+<!--         <javaee:listener-class>org.springframework.web.context.ContextLoaderListener</javaee:listener-class> -->
+<!--     </listener> -->
+<!--     <listener> -->
+<!--         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class> -->
+<!--     </listener> -->
 
     <!-- Tempo de inatividade no sistema, em minutos -->
     <session-config>

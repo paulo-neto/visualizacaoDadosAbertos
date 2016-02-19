@@ -1,5 +1,7 @@
 package si.dce.ufpb.br.visualizacaodadosabertos.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,11 +38,12 @@ public class ParserController{
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> parserXmlToBd()throws VisualizacaoDadosAbertosException{
-        String caminho = obterCaminhoDadosXml("dados.xml");
-        OrgaoParser orgaoParser = parseService.lerXml(caminho);
-        Orgao orgao = orgaoParser.getOrgao();
-        orgao = orgaoService.salvar(orgao) ;
-        return new ResponseEntity<Orgao>(orgao, HttpStatus.OK);
+//        String caminho = obterCaminhoDadosXml("dados.xml");
+//        OrgaoParser orgaoParser = parseService.lerXml(caminho);
+//        Orgao orgao = orgaoParser.getOrgao();
+//        orgao = orgaoService.salvar(orgao) ;
+    	List<Orgao> orgaos = orgaoService.obterTodosAtivos();
+        return new ResponseEntity<Orgao>(orgaos.get(0), HttpStatus.OK);
     }
 
     private String obterCaminhoDadosXml(String nomeArquivo){

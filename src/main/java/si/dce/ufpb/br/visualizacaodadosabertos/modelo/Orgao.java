@@ -27,7 +27,7 @@ public class Orgao implements Serializable{
     @Column(name="no_orgao")
     private String nomeOrgao;
     
-    @OneToMany(mappedBy = "orgao", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "orgao", fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
     private Set<Despesa> despesas;
 
     private boolean registroAtivo;

@@ -7,6 +7,8 @@
         <!--<non-jta-data-source>java:comp/env/jdbc/tomcatDataSource</non-jta-data-source>-->
         <jta-data-source>java:jboss/datasources/dadosabertosds</jta-data-source>
 
+        <class>si.dce.ufpb.br.visualizacaodadosabertos.modelo.Orgao</class>
+        <class>si.dce.ufpb.br.visualizacaodadosabertos.modelo.Despesa</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
