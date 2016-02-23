@@ -10,7 +10,6 @@
     4. API XStream para o parse de arquivos xml.
     5. JBoss EAP 6.3.
 
-
 ###Gerenciamento das dependências e build da aplicação
     
 ####Este projeto foi criado com o *Maven 3.0*, então assumindo que você 
