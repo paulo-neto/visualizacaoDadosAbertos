@@ -60,7 +60,7 @@ public class DadosAbertosController{
     public ResponseEntity<?> atualizarBase() throws VisualizacaoDadosAbertosException{
     	try{
     		dadosAbertosService.limparBD();
-        	String caminho = obterCaminhoDadosXml("AnoAnterior.xml");
+        	String caminho = obterCaminhoDadosXml("AnoAtual.xml");
         	OrgaoParser orgaoParser = parseService.lerXml(caminho);
         	Orgao orgao = orgaoParser.getOrgao();
         	orgao = orgaoService.salvar(orgao) ;
