@@ -29,5 +29,4 @@ public class OrgaoService {
 	public List<Orgao> obterTodosAtivos() {
 		return repositoryCustom.obterTodosAtivos();
 	}
-
 }

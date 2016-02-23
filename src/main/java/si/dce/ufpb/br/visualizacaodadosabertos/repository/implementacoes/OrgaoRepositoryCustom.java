@@ -23,6 +23,5 @@ public class OrgaoRepositoryCustom {
 		Criteria criteria = session.createCriteria(Orgao.class);
 		criteria.add(Restrictions.eq("registroAtivo", true));
 		return criteria.list();
-		
 	}
 }

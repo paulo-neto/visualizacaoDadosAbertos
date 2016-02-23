@@ -14,9 +14,6 @@ import java.util.Set;
 public class Orgao implements Serializable{
 
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 6094108896591446071L;
 
 	@Id

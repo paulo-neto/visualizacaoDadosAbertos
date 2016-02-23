@@ -24,7 +24,6 @@
                      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
               </property>
        </bean>
-
        <!-- Transaction Manager  org.springframework.transaction.jta.JtaTransactionManager
                                  org.springframework.orm.jpa.JpaTransactionManager-->
        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

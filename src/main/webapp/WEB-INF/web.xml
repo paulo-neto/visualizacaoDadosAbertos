@@ -61,7 +61,6 @@
 <!--     <listener> -->
 <!--         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class> -->
 <!--     </listener> -->
-
     <!-- Tempo de inatividade no sistema, em minutos -->
     <session-config>
         <session-timeout>10</session-timeout>

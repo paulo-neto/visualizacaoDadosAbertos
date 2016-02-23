@@ -3,6 +3,7 @@ package si.dce.ufpb.br.visualizacaodadosabertos.modelo;
 import javax.persistence.*;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import si.dce.ufpb.br.visualizacaodadosabertos.util.serializer.MonetarioSerializer;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "TB_DESPESA")
+@JsonIgnoreProperties({"orgao"})
 public class Despesa implements Serializable{
 
 	
@@ -28,7 +30,6 @@ public class Despesa implements Serializable{
     @Column(name="id_despesa")
     private Long id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_orgao", nullable = false, updatable = false)
     private Orgao orgao;

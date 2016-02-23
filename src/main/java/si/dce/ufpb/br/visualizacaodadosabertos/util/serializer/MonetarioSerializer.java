@@ -16,5 +16,4 @@ public class MonetarioSerializer extends JsonSerializer<BigDecimal> {
 			JsonProcessingException {
         jgen.writeString(value.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
 	}
-
 }

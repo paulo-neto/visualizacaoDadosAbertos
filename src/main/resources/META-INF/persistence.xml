@@ -9,7 +9,6 @@
 
         <class>si.dce.ufpb.br.visualizacaodadosabertos.modelo.Orgao</class>
         <class>si.dce.ufpb.br.visualizacaodadosabertos.modelo.Despesa</class>
-
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
             <!-- validate | update | create | create-drop -->
