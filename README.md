@@ -1,4 +1,15 @@
 #visualizacaoDadosAbertos
+    Sistema desenvolvido na disciplina TCC Sistemas de Informação do curso Bacharel em Sistemas de Informação, juntamente com o artigo 
+    Uma análise dos dados abertos sobre gastos dos parlamentares federais, sob a orientação do professor Yuri Malheiros.
+    Será utilizado para a plotagem do gráficos os dados contidos no [arquivo AnoAtual.xml](http://www.camara.gov.br/cotas/AnoAtual.zip) 
+
+###Arquitetura da aplicação
+    1. SGBD MySql.
+    2. Spring Data.
+    3. Spring MVC.
+    4. API XStream para o parse de arquivos xml.
+    5. JBoss EAP 6.3.
+
 
 ###Gerenciamento das dependências e build da aplicação
     
@@ -21,9 +32,11 @@
     'create database dadosabertos;'
 
 ###JBoss-eap-6.3 com o datasource da aplicação configurado.
+    1. No terminal.    
+    2. Iniciar o JBoss: $JBOSSS_HOME/bin run.sh
+    3. Parar o JBoss: Ctrl+C
 
 [JBoss-eap-6.3]
 
 ####Documentação da API Rest
 [Documentação a fazer]
-
