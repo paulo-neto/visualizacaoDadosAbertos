@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>SI DCX/UFPB - TCC Paulo Neto</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+  	<script src="js/maskmoney/jquery.maskMoney.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+</h:head>
+<h:body>
+	<div class="container">
+		<h1 class="text-center">Visualização de Dados Abertos dos gastos dos Deptados Federais</h1>
+		<br/><br/>
+		<h:form id="form">
+			<div class="row">
+				<div class="col-lg-12">
+					<p class="lead" align="justify"> O <a href="#{indexBean.linkPortal}" target="_blank">Portal da Transparência da Câmara dos Deputados</a> disponibiliza arquivos xml contendo registros dos 
+					gastos realizados pelos parlamentares, são informações sobre gastos com passagens, hospedagens, telefonia entre outros, porém é muito difícil para a população inferir 
+					alguma informação utíl devido a natureza do arquivo xml. Este site tem como objetivo disponibilizar visualizações dos gastos dos Deputados Federais que estão contidas 
+					no arquivo <a href="#{indexBean.linkArquivoAnoAtual}">AnoAtual.xml</a>, que contém registros dos gastos do ano atual (#{indexBean.anoAtual}), em forma de gráfico, gerando assim um melhor entendimento 
+					de como os parlamentares vem utilizando as verbas destinadas a eles. </p>
+					<br/>
+					<p class="lead" align="justify">
+					Data da atualização: #{indexBean.dataAtualizacaoArquivo}
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+				<p:panel>
+					<p:pieChart id="pieGraf" value="#{indexBean.topDezGastosPorPartido}"
+						legendPosition="w" title="Top 10 Gastos por Partido" diameter="230" showDataLabels="true" />
+				</p:panel>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-12">
+					<p:panel>
+						<p:barChart id="barChart" value="#{indexBean.topDezTotalGastosPorparlamentar}"
+						 legendPosition="nw" title="Top 15 Gastos por Parlamentar" style="height:600px" 
+						 legendCols="2" datatipFormat="#{indexBean.datatipFormatIntegers}" xaxisLabel="Parlamentares"/>
+					</p:panel>
+				</div>
+			</div>
+		</h:form>
+	</div>
+	<!-- fim container -->
+</h:body>
+</html>

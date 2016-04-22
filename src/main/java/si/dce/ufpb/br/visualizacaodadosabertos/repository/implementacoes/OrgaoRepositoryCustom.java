@@ -9,10 +9,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import si.dce.ufpb.br.visualizacaodadosabertos.modelo.Orgao;
 
 @Repository
+@Transactional
 public class OrgaoRepositoryCustom {
 
 	@PersistenceContext

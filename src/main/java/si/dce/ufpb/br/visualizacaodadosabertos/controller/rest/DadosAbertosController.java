@@ -1,7 +1,9 @@
-package si.dce.ufpb.br.visualizacaodadosabertos.controller;
+package si.dce.ufpb.br.visualizacaodadosabertos.controller.rest;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +72,14 @@ public class DadosAbertosController{
     	}	
     }
 
+    @RequestMapping(value = "/visualizacoes",method = RequestMethod.GET)
+    public ResponseEntity<?> obterVisualizacoes()throws VisualizacaoDadosAbertosException{
+    	Map<String,Object> retorno = new HashMap<String,Object>();
+    	Orgao org = orgaoService.getOrgao();
+    	retorno.put("orgao", org);
+    	return new ResponseEntity<Map>(retorno,HttpStatus.OK);
+    }
+    
     private String obterCaminhoDadosXml(String nomeArquivo){
         if(nomeArquivo == null || nomeArquivo.isEmpty()){
             return "";

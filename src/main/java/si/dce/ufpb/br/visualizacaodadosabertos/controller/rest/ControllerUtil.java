@@ -1,4 +1,4 @@
-package si.dce.ufpb.br.visualizacaodadosabertos.controller;
+package si.dce.ufpb.br.visualizacaodadosabertos.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

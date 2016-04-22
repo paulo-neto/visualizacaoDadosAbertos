@@ -1,4 +1,4 @@
-package si.dce.ufpb.br.visualizacaodadosabertos.controller;
+package si.dce.ufpb.br.visualizacaodadosabertos.controller.rest;
 
 import java.util.List;
 

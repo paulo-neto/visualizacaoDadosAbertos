@@ -25,4 +25,13 @@
 
     <!-- SpringSecurity -->
     <!--<import resource="spring-security.xml"/>-->
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="view">
+                    <bean class="si.dce.ufpb.br.visualizacaodadosabertos.util.ViewScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
 </beans>

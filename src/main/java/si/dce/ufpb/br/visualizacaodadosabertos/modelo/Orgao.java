@@ -1,10 +1,21 @@
 package si.dce.ufpb.br.visualizacaodadosabertos.modelo;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Created by paulo on 14/02/16.
@@ -27,6 +38,10 @@ public class Orgao implements Serializable{
     @OneToMany(mappedBy = "orgao", fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
     private Set<Despesa> despesas;
 
+    @Temporal(value=TemporalType.TIMESTAMP)
+    @Column(name="dt_atualizacao")
+    private Date dataAtualizacao;
+    
     private boolean registroAtivo;
 
     public Orgao() {
@@ -83,6 +98,20 @@ public class Orgao implements Serializable{
         despesa.setOrgao(null);
     }
 
+	/**
+	 * @return the dataAtualizacao
+	 */
+	public Date getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	/**
+	 * @param dataAtualizacao the dataAtualizacao to set
+	 */
+	public void setDataAtualizacao(Date dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -90,6 +119,10 @@ public class Orgao implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((dataAtualizacao == null) ? 0 : dataAtualizacao.hashCode());
+		result = prime * result
+				+ ((despesas == null) ? 0 : despesas.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((nomeOrgao == null) ? 0 : nomeOrgao.hashCode());
@@ -112,6 +145,13 @@ public class Orgao implements Serializable{
 			return false;
 		}
 		Orgao other = (Orgao) obj;
+		if (dataAtualizacao == null) {
+			if (other.dataAtualizacao != null) {
+				return false;
+			}
+		} else if (!dataAtualizacao.equals(other.dataAtualizacao)) {
+			return false;
+		}
 		if (despesas == null) {
 			if (other.despesas != null) {
 				return false;
