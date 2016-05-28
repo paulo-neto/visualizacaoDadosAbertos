@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.primefaces.model.chart.BubbleChartModel;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.PieChartModel;
@@ -30,6 +31,9 @@ public class IndexBean implements Serializable {
 	
 	private PieChartModel topDezGastosPorPartido;
 	private CartesianChartModel topDezTotalGastosPorparlamentar;
+	private PieChartModel topCincoGastosTelefoniaPB;
+	private BigDecimal totalTopCincoTelefonia;
+	
 	@Autowired
 	private OrgaoService orgaoService;
 	
@@ -37,10 +41,27 @@ public class IndexBean implements Serializable {
 	public void init(){
 		topDezGastosPorPartido = new PieChartModel();
 		topDezTotalGastosPorparlamentar = new CartesianChartModel();
+		topCincoGastosTelefoniaPB = new PieChartModel();
 		criarGraficoTopDezTotalGastoPorPartido(topDezGastosPorPartido, orgaoService.getTotalGastoPorPartido());
 		criarTopDezTotalGastosPorparlamentar(topDezTotalGastosPorparlamentar,orgaoService.getTotalGastoPorParlamentar());
+		criarTopCincoGastosTelefonia(topCincoGastosTelefoniaPB,orgaoService.getTotalGastosTelefoniaPorEstadoEparlamentar("PB"));
 	}
 	
+	private void criarTopCincoGastosTelefonia(PieChartModel topCincoTipoGastos,
+			Map<String,BigDecimal> totalGastosTelefoniaPorEstado) {
+		
+		List<String> parlamentar = new ArrayList<String>(totalGastosTelefoniaPorEstado.keySet());
+		Collections.sort(parlamentar);
+		Collections.reverse(parlamentar);
+		parlamentar = parlamentar.subList(0, 5);
+		totalTopCincoTelefonia = new BigDecimal(0);
+		for(String deputado: parlamentar){
+			topCincoTipoGastos.set(deputado,totalGastosTelefoniaPorEstado.get(deputado));
+			totalTopCincoTelefonia = totalTopCincoTelefonia.add(totalGastosTelefoniaPorEstado.get(deputado));
+		}
+		
+	}
+
 	private void criarTopDezTotalGastosPorparlamentar(
 			CartesianChartModel topDezTotalGastosPorparlamentar,
 			Map<BigDecimal, String> totalGastoPorParlamentar) {
@@ -112,6 +133,34 @@ public class IndexBean implements Serializable {
         return "<span style=\"display:none;\">%s</span>R$ <span>%s</span>";  
      } 
 	
+	/**
+	 * @return the topCincoGastosTelefoniaPB
+	 */
+	public PieChartModel getTopCincoGastosTelefoniaPB() {
+		return topCincoGastosTelefoniaPB;
+	}
+
+	/**
+	 * @param topCincoGastosTelefoniaPB the topCincoGastosTelefoniaPB to set
+	 */
+	public void setTopCincoGastosTelefoniaPB(PieChartModel topCincoGastosTelefoniaPB) {
+		this.topCincoGastosTelefoniaPB = topCincoGastosTelefoniaPB;
+	}
+
+	/**
+	 * @return the totalTopCincoTelefonia
+	 */
+	public BigDecimal getTotalTopCincoTelefonia() {
+		return totalTopCincoTelefonia;
+	}
+
+	/**
+	 * @param totalTopCincoTelefonia the totalTopCincoTelefonia to set
+	 */
+	public void setTotalTopCincoTelefonia(BigDecimal totalTopCincoTelefonia) {
+		this.totalTopCincoTelefonia = totalTopCincoTelefonia;
+	}
+
 	public String getAnoAtual(){
 		Date d = new Date();
 		Calendar calendar = Calendar.getInstance();

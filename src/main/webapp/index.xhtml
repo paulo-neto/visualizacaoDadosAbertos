@@ -15,7 +15,7 @@
   	<script src="js/maskmoney/jquery.maskMoney.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
 </h:head>
-<h:body>
+<h:body style="background: #eaeaea;">
 	<div class="container">
 		<h1 class="text-center">Visualização de Dados Abertos dos gastos dos Deptados Federais</h1>
 		<br/><br/>
@@ -29,7 +29,7 @@
 					de como os parlamentares vem utilizando as verbas destinadas a eles. </p>
 					<br/>
 					<p class="lead" align="justify">
-					Data da atualização: #{indexBean.dataAtualizacaoArquivo}
+					Data da atualização do arquivo: #{indexBean.dataAtualizacaoArquivo}
 					</p>
 				</div>
 			</div>
@@ -46,8 +46,19 @@
 				<div class="col-md-12">
 					<p:panel>
 						<p:barChart id="barChart" value="#{indexBean.topDezTotalGastosPorparlamentar}"
-						 legendPosition="nw" title="Top 15 Gastos por Parlamentar" style="height:600px" 
-						 legendCols="2" datatipFormat="#{indexBean.datatipFormatIntegers}" xaxisLabel="Parlamentares"/>
+						 legendPosition="nw" title="Top 15 Gastos por Parlamentar" style="height:400px" 
+						 legendCols="5" datatipFormat="#{indexBean.datatipFormatIntegers}" xaxisLabel="Parlamentares"/>
+					</p:panel>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-12">
+					<p:panel>
+						<p:pieChart id="pieGrafUF" value="#{indexBean.topCincoGastosTelefoniaPB}"
+						legendPosition="w" 
+						title="Top 5 Gastos com Telefonia no Estado da Paraíba. Total gasto com Telefonia R$ #{indexBean.totalTopCincoTelefonia}" 
+						diameter="230" showDataLabels="true" />
 					</p:panel>
 				</div>
 			</div>

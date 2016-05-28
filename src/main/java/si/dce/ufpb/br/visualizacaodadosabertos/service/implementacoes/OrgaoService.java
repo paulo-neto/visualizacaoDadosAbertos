@@ -88,4 +88,35 @@ public class OrgaoService {
 		}
 		return retorno;
 	}
+	
+	public Map<String,BigDecimal> getTotalGastosTelefoniaPorEstadoEparlamentar(String siglaUf){
+		Map<String,BigDecimal> retorno = new HashMap<String,BigDecimal>();
+		Map<String,String> deputadosPB = new HashMap<String,String>();
+		Orgao orgao = getOrgao();
+		BigDecimal total = new BigDecimal(0);
+		for(Despesa despesa:orgao.getDespesas()){
+			for(Despesa desp:orgao.getDespesas()){
+				if(siglaUf.equals(desp.getSgUF()) && "TELEFONIA".equals(desp.getTxtDescricao())){
+					if((desp.getTxNomeParlamentar() != null && despesa.getTxNomeParlamentar() != null) 
+							&& desp.getTxNomeParlamentar().equals(despesa.getTxNomeParlamentar())){
+						
+						deputadosPB.put(desp.getTxNomeParlamentar(),desp.getTxNomeParlamentar());
+					}
+				}
+			}
+		}
+		
+		for(String depPB: deputadosPB.keySet()){
+			for(Despesa despesa:orgao.getDespesas()){
+				if((depPB != null && despesa.getTxNomeParlamentar() != null) 
+						&& depPB.equals(despesa.getTxNomeParlamentar())){
+					total = total.add(despesa.getVlrLiquido()).setScale(0, RoundingMode.HALF_EVEN);
+				}
+			}
+			retorno.put(depPB, total);
+			total = new BigDecimal(0);
+		}
+		
+		return retorno;
+	}
 }
