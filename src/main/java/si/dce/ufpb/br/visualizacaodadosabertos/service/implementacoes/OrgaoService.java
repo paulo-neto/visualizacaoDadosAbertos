@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -118,5 +120,29 @@ public class OrgaoService {
 		}
 		
 		return retorno;
+	}
+
+	public Map<String,Number> getTotalDespesasPorTipo() {
+		Map<String,Number> totalPorDespesa = new LinkedHashMap<String, Number>();
+		Set<String> desp = new HashSet<String>(); 
+		Orgao orgao = getOrgao();
+		for(Despesa despesa:orgao.getDespesas()){
+			if((despesa.getTxtDescricao() != null && !despesa.getTxtDescricao().isEmpty()) 
+					&& !desp.contains(despesa.getTxtDescricao())){
+				desp.add(despesa.getTxtDescricao());
+			}
+		}
+		BigDecimal total = new BigDecimal(0);
+		for(String des: desp){
+			for(Despesa despesa:orgao.getDespesas()){
+				if((despesa.getTxtDescricao() != null && !despesa.getTxtDescricao().isEmpty()) 
+						&& des.equals(despesa.getTxtDescricao())){
+					total = total.add(despesa.getVlrLiquido()).setScale(0, RoundingMode.HALF_EVEN);
+				}
+			}
+			totalPorDespesa.put(des, total);
+			total = new BigDecimal(0);
+		}
+		return totalPorDespesa;
 	}
 }

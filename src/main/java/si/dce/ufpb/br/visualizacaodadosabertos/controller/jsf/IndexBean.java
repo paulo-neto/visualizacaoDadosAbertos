@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
 import org.primefaces.model.chart.BubbleChartModel;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.DonutChartModel;
 import org.primefaces.model.chart.PieChartModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,7 +32,8 @@ public class IndexBean implements Serializable {
 	
 	private PieChartModel topDezGastosPorPartido;
 	private CartesianChartModel topDezTotalGastosPorparlamentar;
-	private PieChartModel topCincoGastosTelefoniaPB;
+	private CartesianChartModel topCincoGastosTelefoniaPB;
+	private PieChartModel tiposDespesas;
 	private BigDecimal totalTopCincoTelefonia;
 	
 	@Autowired
@@ -41,28 +43,48 @@ public class IndexBean implements Serializable {
 	public void init(){
 		topDezGastosPorPartido = new PieChartModel();
 		topDezTotalGastosPorparlamentar = new CartesianChartModel();
-		topCincoGastosTelefoniaPB = new PieChartModel();
-		criarGraficoTopDezTotalGastoPorPartido(topDezGastosPorPartido, orgaoService.getTotalGastoPorPartido());
-		criarTopDezTotalGastosPorparlamentar(topDezTotalGastosPorparlamentar,orgaoService.getTotalGastoPorParlamentar());
-		criarTopCincoGastosTelefonia(topCincoGastosTelefoniaPB,orgaoService.getTotalGastosTelefoniaPorEstadoEparlamentar("PB"));
+		topCincoGastosTelefoniaPB = new CartesianChartModel();
+		tiposDespesas = new PieChartModel();
+		criarGraficoTotalGastoPorPartido(topDezGastosPorPartido, orgaoService.getTotalGastoPorPartido());
+		criarTopQuinzeTotalGastosPorparlamentar(topDezTotalGastosPorparlamentar,orgaoService.getTotalGastoPorParlamentar());
+		criarGastosTelefonia(topCincoGastosTelefoniaPB,orgaoService.getTotalGastosTelefoniaPorEstadoEparlamentar("PB"));
+		criarGraficoTiposDespesas(tiposDespesas,orgaoService.getTotalDespesasPorTipo());
 	}
 	
-	private void criarTopCincoGastosTelefonia(PieChartModel topCincoTipoGastos,
+	private void criarGraficoTiposDespesas(PieChartModel tiposDespesas,
+			Map<String, Number> totalDespesasPorTipo) {
+		
+		List<String> despesas = new ArrayList<String>(totalDespesasPorTipo.keySet());
+		Collections.sort(despesas);
+		Collections.reverse(despesas);
+		for(String des: despesas){
+			if(totalDespesasPorTipo.get(des) != null){
+				tiposDespesas.set(des,totalDespesasPorTipo.get(des));
+			}
+			
+		}
+	}
+
+	private void criarGastosTelefonia(CartesianChartModel topCincoTipoGastos,
 			Map<String,BigDecimal> totalGastosTelefoniaPorEstado) {
 		
-		List<String> parlamentar = new ArrayList<String>(totalGastosTelefoniaPorEstado.keySet());
-		Collections.sort(parlamentar);
-		Collections.reverse(parlamentar);
-		parlamentar = parlamentar.subList(0, 5);
+		List<String> despesas = new ArrayList<String>(totalGastosTelefoniaPorEstado.keySet());
+		Collections.sort(despesas);
+		ChartSeries series;
 		totalTopCincoTelefonia = new BigDecimal(0);
-		for(String deputado: parlamentar){
-			topCincoTipoGastos.set(deputado,totalGastosTelefoniaPorEstado.get(deputado));
-			totalTopCincoTelefonia = totalTopCincoTelefonia.add(totalGastosTelefoniaPorEstado.get(deputado));
+		for(String valor: despesas){
+			series = new ChartSeries();
+			BigDecimal vl = totalGastosTelefoniaPorEstado.get(valor);
+			series.set(" ", vl.doubleValue());
+			series.setLabel(valor);
+			topCincoGastosTelefoniaPB.addSeries(series);
+			totalTopCincoTelefonia = totalTopCincoTelefonia.add(vl);
 		}
+		
 		
 	}
 
-	private void criarTopDezTotalGastosPorparlamentar(
+	private void criarTopQuinzeTotalGastosPorparlamentar(
 			CartesianChartModel topDezTotalGastosPorparlamentar,
 			Map<BigDecimal, String> totalGastoPorParlamentar) {
 		
@@ -90,13 +112,15 @@ public class IndexBean implements Serializable {
 		}
 	}
 
-	private void criarGraficoTopDezTotalGastoPorPartido(PieChartModel pieChart,Map<BigDecimal,String> map){
+	private void criarGraficoTotalGastoPorPartido(PieChartModel pieChart,Map<BigDecimal,String> map){
 		List<BigDecimal> despesas = new ArrayList<BigDecimal>(map.keySet());
 		Collections.sort(despesas);
 		Collections.reverse(despesas);
-		despesas = despesas.subList(0, 11);
 		for(BigDecimal valor: despesas){
-			pieChart.set(map.get(valor),valor);
+			if(map.get(valor) != null){
+				pieChart.set(map.get(valor),valor);
+			}
+			
 		}
 	}
 
@@ -136,14 +160,14 @@ public class IndexBean implements Serializable {
 	/**
 	 * @return the topCincoGastosTelefoniaPB
 	 */
-	public PieChartModel getTopCincoGastosTelefoniaPB() {
+	public CartesianChartModel getTopCincoGastosTelefoniaPB() {
 		return topCincoGastosTelefoniaPB;
 	}
 
 	/**
 	 * @param topCincoGastosTelefoniaPB the topCincoGastosTelefoniaPB to set
 	 */
-	public void setTopCincoGastosTelefoniaPB(PieChartModel topCincoGastosTelefoniaPB) {
+	public void setTopCincoGastosTelefoniaPB(CartesianChartModel topCincoGastosTelefoniaPB) {
 		this.topCincoGastosTelefoniaPB = topCincoGastosTelefoniaPB;
 	}
 
@@ -159,6 +183,20 @@ public class IndexBean implements Serializable {
 	 */
 	public void setTotalTopCincoTelefonia(BigDecimal totalTopCincoTelefonia) {
 		this.totalTopCincoTelefonia = totalTopCincoTelefonia;
+	}
+	
+	/**
+	 * @return the tiposDespesas
+	 */
+	public PieChartModel getTiposDespesas() {
+		return tiposDespesas;
+	}
+
+	/**
+	 * @param tiposDespesas the tiposDespesas to set
+	 */
+	public void setTiposDespesas(PieChartModel tiposDespesas) {
+		this.tiposDespesas = tiposDespesas;
 	}
 
 	public String getAnoAtual(){
